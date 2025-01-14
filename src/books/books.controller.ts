@@ -1,8 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BooksService } from './books.service';
 
 @Controller('books')
 export class BooksController {
-
+    constructor(private readonly booksService: BooksService) {} // construtor
+    
     // Método LISTA TODOS OS LIVROS
     @Get()
     findAll() {

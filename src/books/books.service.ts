@@ -1,47 +1,45 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Book } from './books.entity';
-import { start } from 'repl';
+import { BOOKS } from './books.mock';
 
 @Injectable()
 export class BooksService {
+    books = BOOKS;
 
-    private books: Book[] = [   // Declarando propriedade chamada  books do tipo Book
-        {
-            id: 11,
-            title: 'Lagoa Azul',
-            genre: 'Classic',
-            tags: ['Classic', 'Autor', 'vintage', 'Tv']
 
-        },
-    ]
 
-    findAll() {          // Retornar os registros da array books
+    findAll(): Book[] {          // Retornar os registros da array books
         return this.books
     }
 
-    findOne(id: number) {        //Passa o parametro para a busca
-        return this.books.find(book => book.id === id)  //Busca o registro especifico
+    findOne(bookId: number) {        //Passa o parametro para a busca
+        let id = Number(bookId); 
+        const book = this.books.find(book => book.id === id);
+        if (!book) {
+            throw new NotFoundException(`Book ID ${id} not found.`);
+        }
+        return book; // Retorna diretamente o livro encontrado
     }
 
-    create(createBookDTO: Book) {    // Recebe os dados para criar um novo livro
-        const newBook = { id: Date.now(), ...createBookDTO };
-        this.books.push(createBookDTO)
+    create(createBookDTO: Book): Book { // Adiciona o tipo de retorno 
+        const newBook: Book = { id: Date.now(), ...createBookDTO };
+        this.books.push(newBook);
+        return newBook; // Retorna o novo livro criado 
     }
-
     update(id: number, updateBookDTO: Book) { //verifica se tem o curso que deseja atualizar
         const index = this.books.findIndex(book => book.id === id);
         if (index === -1) {
-            throw new Error(`Book with ID ${id} not found`);
+            throw new NotFoundException(`Book with ID ${id} not found`);
         }
-        this.books[index] = { ...this.books[index], ...updateBookDTO };
+        this.books[index] = { id, ...updateBookDTO };
         return this.books[index];
     }
 
     remove(id: number) {
         const index = this.books.findIndex(book => book.id === id);
         if (index === -1) {
-          throw new Error(`Book with ID ${id} not found`);
+            throw new NotFoundException(`Book with ID ${id} not found`);
         }
         this.books.splice(index, 1);
-      }
+    }
 }

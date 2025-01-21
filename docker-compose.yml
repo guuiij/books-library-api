@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  db:
+    build: .
+    container_name: library-api-db
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql/dbdata
+    environment:
+     - POSTGRES_PASSWORD=docker
+     - POSTGRES_DB=libraryapi 

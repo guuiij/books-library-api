@@ -1,4 +1,4 @@
-import { Book } from "./books.entity";
+import { Book } from "./entities/books.entity";
 
 export const BOOKS: Book[] = [
   { id: 1, title: '1984', genre: 'Dystopian', tags: ['Dystopian', 'Classic', 'George Orwell'] },

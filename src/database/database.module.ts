@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Book } from 'src/books/entities/books.entity';
 import { DataSourceOptions } from 'typeorm';
 
 export const dataSourceOptions: DataSourceOptions = {
@@ -10,14 +11,14 @@ export const dataSourceOptions: DataSourceOptions = {
     username:'postgres',     // Usuário padrão quando não é definido
     password: 'docker',      // Senha definida como docker
     database: 'libraryapi',  // Mesmo nome daqui -->  POSTGRES_DB=libraryapi 
-    entities: [],            // Define quais entidades o TypeORM vai cria estrurua de BD 
+    entities: [Book],            // Define quais entidades o TypeORM vai cria estrurua de BD 
     synchronize: true,
 
 }
 
 @Module({
     imports: 
-    [TypeOrmModule.forRootAsync({
+    [TypeOrmModule.forRootAsync({   //PAra conexão em banco de dados
         useFactory: async () => {  // Retorna propriedade da variavei criado a cima
             return {
                 ...dataSourceOptions

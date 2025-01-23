@@ -10,6 +10,6 @@ export class CreateBookDTO {
 
     @IsArray()
     @IsString({each: true})
-    readonly tags?: string[]
+    readonly tags: string[]
 
 }

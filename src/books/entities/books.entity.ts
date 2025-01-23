@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Tag } from "./tags.entity"
 
 @Entity('books')   //Marcar uma classe como uma entidade que será mapeada para uma tabela no banco de dados.
 export class Book {
@@ -11,7 +12,11 @@ export class Book {
     @Column()
     genre: string
     
-    @Column('json', {nullable: true}) // Armazenaa um json e poode ter coluna nullo
-    tags?: string[]
+               // Usado na entidade principal, que definie proprietarios
+    @ManyToMany(() => Tag, tag => tag.books, { 
+        cascade: true, 
+        eager: true }) // Tag nosso alvo ( relacionado ) , e tag é o inverse side  tem propriedade books
+    @JoinTable()
+    tags: Tag[]           // deixa de ser array de string e é array de tag
 
 }

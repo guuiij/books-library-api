@@ -4,7 +4,7 @@ import { Author } from "./authors.entity"
 
 @Entity('books')   //Marcar uma classe como uma entidade que será mapeada para a tabela "Book" no banco de dados.
 export class Book {
-    @PrimaryGeneratedColumn() @PrimaryGeneratedColumn() // Define a chave primária da tabela com geração automática de valores
+    @PrimaryGeneratedColumn() // Define a chave primária da tabela com geração automática de valores
     id: number
 
     @Column()       // Mapeia a coluna "title" ma tabela "book"
@@ -21,7 +21,7 @@ export class Book {
     tags: Tag[]       // Define a propriedade tags como um array de objetos Tag
 
     @ManyToOne(() => Author, author => author.books)
-    authors: Author[]// Define a propriedade author como um array de objetos Author
+    author: Author// Define a propriedade author como um array de objetos Author
 
 
 }

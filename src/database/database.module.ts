@@ -13,7 +13,7 @@ export const dataSourceOptions: DataSourceOptions = {
     username: 'postgres',     // Usuário padrão quando não é definido
     password: 'docker',      // Senha definida como docker
     database: 'libraryapi',  // Mesmo nome daqui -->  POSTGRES_DB=libraryapi 
-    entities: [Book, Tag, Author],            // Define quais entidades o TypeORM vai cria estrurua de BD 
+    entities: [Book, Tag, Author],  // Define quais entidades o TypeORM vai cria estrurua de BD 
     synchronize: true, // Tudo que fazemos nas entidades ja reflete automaticamente no banco de dados
     // PERIGO SUAR EM PRODUÇÂO POIS PODE DESTRUIR DADOS
 }

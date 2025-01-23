@@ -1,8 +1,8 @@
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { Book } from "./books.entity"
 import { Tag } from "./tags.entity"
 
-@Entity()
+@Entity('authors')
 export class Author {
     @PrimaryGeneratedColumn()
     id: number
@@ -10,10 +10,11 @@ export class Author {
     @Column()
     name: string
 
-    @OneToMany(() => Book, book => book.authors )
+    @OneToMany(() => Book, book => book.author)
     books: Book[]
 
-    @ManyToMany(() => Tag, tag => tag.authur)
+    @ManyToMany(() => Tag, tag => tag.authors)
+    @JoinTable()
     tags: Tag[]
 
     //bio: string

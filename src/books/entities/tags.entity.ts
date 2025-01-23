@@ -15,6 +15,6 @@ export class Tag {
     books: Book[]  // Array da entidade Books
 
     @ManyToMany(() => Author, author => author.tags )
-    authur: Author[]
+    authors: Author[]
 
 }

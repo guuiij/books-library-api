@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Book } from "./books.entity";
+import { Author } from "./authors.entity";
 
 
 @Entity('tags')
@@ -12,5 +13,8 @@ export class Tag {
 
     @ManyToMany(() => Book, book => book.tags)
     books: Book[]  // Array da entidade Books
+
+    @ManyToMany(() => Author, author => author.tags )
+    authur: Author[]
 
 }

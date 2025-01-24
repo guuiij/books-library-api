@@ -20,7 +20,10 @@ export class Book {
     @JoinTable()
     tags: Tag[]       // Define a propriedade tags como um array de objetos Tag
 
-    @ManyToOne(() => Author, author => author.books)
+    @ManyToOne(() => Author, author => author.books,{
+        cascade: true,
+        eager: true
+    })
     author: Author// Define a propriedade author como um array de objetos Author
 
 

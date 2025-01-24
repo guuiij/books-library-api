@@ -12,4 +12,7 @@ export class CreateBookDTO {
     @IsString({each: true})
     readonly tags: string[]
 
+    @IsString()
+    readonly author: string
+
 }

@@ -13,11 +13,5 @@ export class Author {
     @OneToMany(() => Book, book => book.author)
     books: Book[]
 
-    @ManyToMany(() => Tag, tag => tag.authors)
-    @JoinTable()
-    tags: Tag[]
-
-    //bio: string
-    //birthday: Date
 
 }
